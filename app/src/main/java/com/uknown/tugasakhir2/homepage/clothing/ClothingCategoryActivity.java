@@ -72,7 +72,7 @@ public class ClothingCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 toItemActivity.putExtra("menorwoman", dataCategory); // Menambahkan data ketika yang diklik pria atau wanita
-                toItemActivity.putExtra("ketegori", "bottomwear");
+                toItemActivity.putExtra("kategori", "bottomwear");
                 // Memulai activity
                 startActivity(toItemActivity);
             }

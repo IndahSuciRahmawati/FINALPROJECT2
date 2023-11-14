@@ -22,7 +22,7 @@ public class UserRegisterActivity extends AppCompatActivity {
     EditText Name;
     EditText Email;
     EditText PhoneNumber;
-    EditText Password;
+    EditText Password, password2;
     Button Registerbtn;
 
     FirebaseAuth mAuth;
@@ -34,9 +34,9 @@ public class UserRegisterActivity extends AppCompatActivity {
 
         Name = findViewById(R.id.etName);
         Email = findViewById(R.id.etEmail);
-        PhoneNumber = findViewById(R.id.etPhone);
         Password = findViewById(R.id.etPassword);
         Registerbtn = findViewById(R.id.btnRegister);
+        password2 = findViewById(R.id.etPassword2);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -52,11 +52,12 @@ public class UserRegisterActivity extends AppCompatActivity {
     private void createUser() {
         String username = Name.getText().toString().trim();
         String emailTxt = Email.getText().toString().trim();
-        String phoneTxt = PhoneNumber.getText().toString().trim();
         String passTxt = Password.getText().toString().trim();
 
-        if (username.isEmpty() || emailTxt.isEmpty() || phoneTxt.isEmpty() || passTxt.isEmpty()) {
+        if (username.isEmpty() || emailTxt.isEmpty() || passTxt.isEmpty()) {
             Toast.makeText(UserRegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+        } else if (!passTxt.equals(password2.getText().toString())){
+            Toast.makeText(UserRegisterActivity.this, "Password tidak identik", Toast.LENGTH_SHORT).show();
         }
 
         mAuth.createUserWithEmailAndPassword(emailTxt, passTxt)
@@ -65,7 +66,7 @@ public class UserRegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            DataUser dataUser = new DataUser(username, emailTxt, phoneTxt, null, passTxt, "user");
+                            DataUser dataUser = new DataUser(username, emailTxt, passTxt, "user");
                             String uId = task.getResult().getUser().getUid();
                             FirebaseDatabase.getInstance().getReference("User").child(uId).setValue(dataUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
