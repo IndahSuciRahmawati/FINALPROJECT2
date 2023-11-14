@@ -6,5 +6,5 @@ Catatan :
     password : admin
     
   * Ketika ingin mengupdate quantity barang menggunakan id, sesuaikan item dan gunakan id sesuai dengan gambar dibawah (sebagai contoh)
-    ![CHEESE!](../response_example.png)
+    ![Alt text](../response_example.png)
     
