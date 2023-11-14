@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uknown.tugasakhir2.HalamanDepanActivity;
 import com.uknown.tugasakhir2.databinding.StaffPageBinding;
 
 public class StaffPageActivity extends AppCompatActivity {
@@ -46,8 +47,6 @@ public class StaffPageActivity extends AppCompatActivity {
                 binding.shName.setText(username);
             }
 
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -66,7 +65,7 @@ public class StaffPageActivity extends AppCompatActivity {
     private void checkUser() {
         FirebaseUser firebaseUser = auth.getCurrentUser();
         if (firebaseUser == null){
-            startActivity(new Intent(this, StaffLoginActivity.class));
+            startActivity(new Intent(this, HalamanDepanActivity.class));
             finish();
         }
     }

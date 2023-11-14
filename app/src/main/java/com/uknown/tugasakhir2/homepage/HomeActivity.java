@@ -17,12 +17,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.uknown.tugasakhir2.AboutActivity;
+import com.uknown.tugasakhir2.HalamanDepanActivity;
 import com.uknown.tugasakhir2.R;
 import com.uknown.tugasakhir2.homepage.adapter.HomeAdapter;
 import com.uknown.tugasakhir2.homepage.clothing.ClothingActivity;
 import com.uknown.tugasakhir2.homepage.detailproduct.ProductListActivity;
 import com.uknown.tugasakhir2.homepage.electronic.ElectronicActivity;
 import com.uknown.tugasakhir2.homepage.model.ItemModel;
+import com.uknown.tugasakhir2.staff.StaffLoginActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,11 +42,22 @@ public class HomeActivity extends AppCompatActivity implements HomeAdapter.onIte
     private HomeAdapter adapter;
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
+    private FirebaseDatabase database;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
+    private String uid;
+    private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        database = FirebaseDatabase.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
+        reference = database.getReference();
+        auth = FirebaseAuth.getInstance();
 
         // Mengambil componen toolbar dan navigation view dan drawer layout
         Toolbar tl = findViewById(R.id.toolbar);
@@ -132,8 +150,18 @@ public class HomeActivity extends AppCompatActivity implements HomeAdapter.onIte
         // Action ketika icon keluar diklik
         if(item.getItemId() == R.id.logout){
             Toast.makeText(HomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
+            auth.signOut();
+            checkUser();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void checkUser() {
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        if (firebaseUser == null){
+            startActivity(new Intent(this, HalamanDepanActivity.class));
+            finish();
+        }
     }
 
     @Override
@@ -151,6 +179,8 @@ public class HomeActivity extends AppCompatActivity implements HomeAdapter.onIte
         // Action ketika item navigation diklik sesuai dengan id
         if (item.getItemId() == R.id.aboutus){
             Toast.makeText(HomeActivity.this, "Berhasil", Toast.LENGTH_SHORT).show();
+            Intent goAbout = new Intent(HomeActivity.this, AboutActivity.class);
+            startActivity(goAbout);
         }
         return true;
     }

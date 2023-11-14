@@ -2,18 +2,16 @@ package com.uknown.tugasakhir2.user;
 
 public class DataUser {
 
-    public String name, email, phoneNumber, alamat, password, role;
+    public String name, email, password, role;
 
     // Konstruktor tanpa argumen diperlukan oleh Firebase Database
     public DataUser() {
         // konstruktor tanpa argumen
     }
 
-    public DataUser(String name, String email, String phoneNumber, String alamat, String password, String role) {
+    public DataUser(String name, String email, String password, String role) {
         this.name = name;
         this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.alamat = alamat;
         this.password = password;
         this.role = role;
     }
@@ -32,22 +30,6 @@ public class DataUser {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
     }
 
     public String getPassword() {

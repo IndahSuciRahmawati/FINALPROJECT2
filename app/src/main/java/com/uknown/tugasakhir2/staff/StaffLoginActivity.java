@@ -74,7 +74,7 @@ public class StaffLoginActivity extends AppCompatActivity {
 
                                     if (isExcist) {
                                         DataUser dataUser = snapshot.getValue(DataUser.class);
-                                        String statusUser = dataUser.getRole().toString();
+                                        String statusUser = dataUser.getRole();
 
                                         if (statusUser.equals("staff")) {
                                             Toast.makeText(StaffLoginActivity.this, "Succesfully logged in", Toast.LENGTH_SHORT).show();
