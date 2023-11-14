@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">finalproject2</string>
+    <string name="username">USERNAME</string>
+    <string name="password">PASSWORD</string>
+    <string name="footer">We Wish You Happy Working Today</string>
+    <string name="add_staf">ADD STAFF</string>
+    <string name="add_stok">ADD STOK</string>
+    <string name="confirm">CONFIRM PASSWORD</string>
+    <string name="Item_id">Item ID</string>
+    <string name="quantity_id">Quantity to Add</string>
+
+
+</resources>
